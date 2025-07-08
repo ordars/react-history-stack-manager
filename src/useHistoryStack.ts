@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { UseHistoryStackReturn, HistoryStackItem } from './types';
+import { UseHistoryStackReturn, HistoryStackItem, AccessibilityOptions } from './types';
 import {
-  addHisData,
-  removeHisData,
+  addToStack as addStackItem,
+  removeFromStack as removeStackItem,
   loadHisData,
   initHistoryStackManager,
 } from './historyStackManager';
@@ -38,14 +38,18 @@ export function useHistoryStack(): UseHistoryStackReturn {
 
   // 히스토리 스택에 아이템 추가
   const addToStack = useCallback((type: string, id?: string, onClose?: () => void) => {
-    addHisData(type, id, onClose);
+    addStackItem(type, id, onClose);
     updateStackItems();
   }, [updateStackItems]);
 
   // 히스토리 스택에서 아이템 제거
   const removeFromStack = useCallback((type: string, id?: string) => {
-    removeHisData(type, id);
-    updateStackItems();
+    removeStackItem(type, id).then(() => {
+      updateStackItems();
+    }).catch(error => {
+      console.warn('Error removing from stack:', error);
+      updateStackItems(); // 에러가 있어도 상태 업데이트
+    });
   }, [updateStackItems]);
 
   // 초기화 및 정리
@@ -102,12 +106,16 @@ export function useHistoryStackItem(
   type: string,
   id: string | undefined,
   onClose: (() => void) | undefined,
-  isActive: boolean = true
+  isActive: boolean = true,
+  accessibilityOptions?: AccessibilityOptions
 ): void {
   const { addToStack, removeFromStack } = useHistoryStack();
 
   useEffect(() => {
     if (isActive && onClose) {
+      // TODO: 향후 버전에서 accessibilityOptions를 지원할 예정
+      // if (accessibilityOptions) { ... }
+      
       addToStack(type, id, onClose);
       
       return () => {
