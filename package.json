@@ -1,0 +1,63 @@
+{
+  "name": "react-history-stack-manager",
+  "version": "1.0.0",
+  "description": "A React library for managing browser history stack with UI components (modal, sidebar, layer) integration",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "prepare": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "echo \"Clean completed\""
+  },
+  "keywords": [
+    "react",
+    "history",
+    "browser-history",
+    "modal",
+    "sidebar",
+    "layer",
+    "navigation",
+    "ux",
+    "mobile",
+    "stack-manager",
+    "typescript",
+    "hooks"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/react-history-stack-manager.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/react-history-stack-manager/issues"
+  },
+  "homepage": "https://github.com/your-username/react-history-stack-manager#readme",
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  "dependencies": {
+    "react-history-stack-manager": "^1.0.0",
+    "uuid": "^11.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.10",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@types/uuid": "^10.0.0",
+    "typescript": "^5.8.3"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
